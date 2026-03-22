@@ -13,7 +13,9 @@ volumes:
     name: wp-data
   minecraft-data:
     name: minecraft-data
-
+  uptime-kuma-data:
+    name: uptime-kuma-data
+    
 services:
   # --- REVERSE PROXY ---
   nginx-proxy-manager:
