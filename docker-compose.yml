@@ -7,8 +7,6 @@ volumes:
     name: nginx-proxy-manager-data
   nginx-proxy-manager-letsencrypt:
     name: nginx-proxy-manager-letsencrypt
-  dns-config:
-    name: dns-config
   wp-data:
     name: wp-data
   minecraft-data:
@@ -41,22 +39,6 @@ services:
       - nginx-proxy-manager-letsencrypt:/etc/letsencrypt
     networks:
       - backend
-
-  # --- DNS ---
-  dns-server:
-    image: 'technitium/dns-server:14.3.0'
-    hostname: dns-server
-    container_name: dns-server
-    volumes:
-      - dns-config:/etc/dns
-    ports:
-      - '53:53/tcp'
-      - '53:53/udp'
-    networks:
-      - backend
-    depends_on:
-      - mariadb
-      - nginx-proxy-manager
 
   # --- MARIADB ---
   mariadb:
