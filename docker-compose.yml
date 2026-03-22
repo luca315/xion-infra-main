@@ -104,7 +104,7 @@ services:
 
   # --- netdata ---
   netdata:
-    image: netdata/netdata:2.9.0
+    image: netdata/netdata:v2.9.0
     hostname: netdata
     container_name: netdata
     restart: unless-stopped
