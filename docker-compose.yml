@@ -17,6 +17,8 @@ volumes:
     name: uptime-kuma-data
   portainer-data:
     name: portainer-data
+  mariadb-data:
+    name: mariadb-data
     
 services:
   # --- REVERSE PROXY ---
