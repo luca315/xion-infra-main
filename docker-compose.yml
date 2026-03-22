@@ -140,6 +140,7 @@ services:
     restart: unless-stopped
     networks:
       - backend
+  
   # --- Uptima Kuma ---
   uptime-kuma:
     image: louislam/uptime-kuma:2.2.1
