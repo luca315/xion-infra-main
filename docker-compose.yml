@@ -152,3 +152,15 @@ services:
     restart: unless-stopped
     networks:
       - backend
+      
+  portainer:
+    image: portainer/portainer-ee:l.25.0
+    container_name: portainer
+    hostname: portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    networks:
+      - backend
+
