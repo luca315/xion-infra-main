@@ -73,7 +73,7 @@ services:
 
   # --- PMA ---
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.2.3-apache
+    image: phpmyadmin:5.2.3-apache
     container_name: pma
     hostname: pma
     restart: unless-stopped
