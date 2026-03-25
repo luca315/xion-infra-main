@@ -1,0 +1,18 @@
+download the latest tarball of the linux kernel from
+kernel.org
+
+then run following commands in the folder 
+
+copies the local system kernel configuration in the config file
+cp /boot/config-$(uname -r) .config
+make olddefconfig
+
+
+make -j$(nproc) bindeb-pkg
+
+creates the debian package for the kernel 
+
+
+
+dependendcies 
+sudo apt install build-essential bc bison flex libssl-dev libelf-dev dwarves.
