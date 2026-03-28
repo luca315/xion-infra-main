@@ -9,6 +9,8 @@ volumes:
     name: mc-proxy-data
   portainer-data:
     name: portainer-data
+  beszel-data:
+    name: beszel-data
 
 services:
   # --- DIAGRAMS & DRAWING ---
@@ -17,7 +19,7 @@ services:
     container_name: drawio
     restart: unless-stopped
     ports: 
-      - 3001:8080
+      - "3001:8080/tcp"
 
        # --- Cloud Console ---
   portainer:
@@ -30,7 +32,19 @@ services:
       - portainer-data:/data
     ports:
       - "3002:9000/tcp"
-  
+  # --- Reccource Monitoring ---     
+  beszel:
+    image: henrygd/beszel:0.18.5
+    container_name: beszel
+    restart: unless-stopped
+    ports:
+      - "3003:8090/tcp" # Web UI
+    volumes:
+      - beszel-data:/beszel_data
+    environment:
+      USER: ${ENV_BESZEL_USERNAME}
+      PASSWORD: ${ENV_BESZEL_PASSWORD} # Optional: set password
+      
   # --- Minecraft Server ---
   minecraft-proxy:
     image: itzg/minecraft-server:${ENV_MC_IMAGE_VERSION}
