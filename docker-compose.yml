@@ -1,1 +1,97 @@
+networks:
+  xion-net:
+    name: xion-net
+
+volumes:
+  mc-data:
+    name: mc-data
+  owncast-data:
+    name: owncast-data
+  ollama-data:
+    name: ollama-data
+  open-webui-data:
+    name: open-webui-data
+  portainer-data:
+    name: portainer-data
+services:
+  # --- DIAGRAMS & DRAWING ---
+  drawio:
+    image: jgraph/drawio:29.6.6
+    container_name: drawio
+    restart: unless-stopped
+    ports: 
+      - 3001:8080
+
+  # --- STREAMING ---
+  owncast:
+    image: owncast/owncast:0.2.4
+    container_name: owncast
+    volumes:
+      - owncast-data:/app/data
+    restart: unless-stopped
+    ports: 
+      - "3002:8080/tcp"
+      - "19132:19132/tcp"
+  # --- LOCALE AI (BACKEND) ---
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    hostname: ollama
+    volumes:
+      - ollama-data:/root/.ollama
+    restart: unless-stopped
+    
+  # --- LOCALE AI (FRONTEND) ---
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    hostname: open-webui
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - open-webui-data:/app/data
+    restart: unless-stopped
+    ports:
+      - "3003:8080/tcp"
+
+  # --- MESSENGER CLIENT ---
+  element:
+    image: vectorim/element-web:v1.12.13
+    container_name: element
+    hostname: element
+    restart: unless-stopped
+    ports:
+      - "3004:80/tcp"
+
+  # --- Minecraft Server Proxy ---
+  minecraft:
+    image: itzg/minecraft-server:${ENV_MC_IMAGE_VERSION}
+    container_name: mc-server
+    hostname: mc-server
+    stdin_open: true
+    ports:
+      - "25565:25565/tcp"
+    environment:
+      EULA: "TRUE"
+      TYPE: ${ENV_MC_TYPE}
+      MEMORY:  ${ENV_MC_MEMORY}
+      VERSION: ${ENV_MC_VERSION}
+    volumes:
+      - mc-data:/data
+    restart: unless-stopped
+
+    # --- Cloud Console ---
+    services:
+      portainer:
+        container_name: portainer
+        hostname: portainer
+        image: portainer/portainer-ee:lts
+        restart: unless-stopped
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+          - portainer-data:/data
+        ports:
+          - "3005:9000/tcp"
+
+  
 
