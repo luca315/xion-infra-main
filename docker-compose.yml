@@ -47,6 +47,7 @@ services:
     container_name: mc-server
     hostname: mc-server
     stdin_open: true
+    tty: true
     ports:
       - "25565:25565/tcp"
     environment:
