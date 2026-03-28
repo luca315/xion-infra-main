@@ -60,7 +60,7 @@ services:
       MEMORY: ${ENV_MC_MEMORY}
       VERSION: ${ENV_MC_VERSION}
     volumes:
-      - mc-data:/data
+      - mc-server-data:/data
     restart: ${ENV_MC_RESTART}
 
 
