@@ -1,5 +1,5 @@
 networks:
-  xion-net:
+  default:
     name: xion-net
 
 volumes:
