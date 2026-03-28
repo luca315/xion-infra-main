@@ -6,12 +6,8 @@ console.domain.tld {
   reverse_proxy 127.0.0.1:3002
 }
 
-status.domain.tld {
-  reverse_proxy 127.0.0.1:3003
-}
-
 icecast.domain.tld {
-  reverse_proxy 127.0.0.1:3004
+  reverse_proxy 127.0.0.1:3003
 }
 
 # web server config example
