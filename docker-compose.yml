@@ -13,6 +13,7 @@ volumes:
     name: open-webui-data
   portainer-data:
     name: portainer-data
+
 services:
   # --- DIAGRAMS & DRAWING ---
   drawio:
