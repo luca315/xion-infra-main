@@ -6,7 +6,7 @@ stream.domain.tld {
   reverse_proxy 127.0.0.1:3002
 }
 
-ai.domain.tld {
+cloud.domain.tld {
   reverse_proxy 127.0.0.1:3003
 }
 
