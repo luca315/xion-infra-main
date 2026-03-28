@@ -9,8 +9,8 @@ volumes:
     name: mc-server-data
   portainer-data:
     name: portainer-data
-  beszel-data:
-    name: beszel-data
+  ollama-data:
+    name: ollama-data
 
 services:
   # --- DIAGRAMS & DRAWING ---
@@ -21,7 +21,7 @@ services:
     ports: 
       - "3001:8080/tcp"
 
-       # --- Cloud Console ---
+  # --- Cloud Console ---
   portainer:
     container_name: portainer
     hostname: portainer
@@ -32,20 +32,15 @@ services:
       - portainer-data:/data
     ports:
       - "3002:9000/tcp"
- 
-  # --- Reccource Monitoring ---     
-  beszel:
-    image: henrygd/beszel:0.18.5
-    container_name: beszel
-    restart: unless-stopped
-    ports:
-      - "3003:8090/tcp" # Web UI
+
+  # -- Local AI ---
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
     volumes:
-      - beszel-data:/beszel_data
-    environment:
-      USER: ${ENV_BESZEL_USERNAME}
-      PASSWORD: ${ENV_BESZEL_PASSWORD} # Optional: set password
-      
+      - ollama-data:/root/.ollama
+    restart: ${ENV_OLLAMA_RESTART}
+
   # --- Minecraft Server ---
   mc-server:
     image: itzg/minecraft-server:${ENV_MC_IMAGE_VERSION}
@@ -62,6 +57,7 @@ services:
     volumes:
       - mc-server-data:/data
     restart: ${ENV_MC_RESTART}
+
 
 
   
