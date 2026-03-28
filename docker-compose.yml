@@ -5,8 +5,8 @@ networks:
     name: mc-net
     
 volumes:
-  mc-proxy-data:
-    name: mc-proxy-data
+  mc-server-data:
+    name: mc-server-data
   portainer-data:
     name: portainer-data
   beszel-data:
@@ -47,7 +47,7 @@ services:
       PASSWORD: ${ENV_BESZEL_PASSWORD} # Optional: set password
       
   # --- Minecraft Server ---
-  minecraft-proxy:
+  mc-server:
     image: itzg/minecraft-server:${ENV_MC_IMAGE_VERSION}
     container_name: mc-server
     hostname: mc-server
