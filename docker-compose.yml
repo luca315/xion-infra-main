@@ -83,7 +83,6 @@ services:
     restart: unless-stopped
 
     # --- Cloud Console ---
-    services:
       portainer:
         container_name: portainer
         hostname: portainer
