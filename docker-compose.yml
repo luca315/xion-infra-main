@@ -3,14 +3,8 @@ networks:
     name: xion-net
 
 volumes:
-  mc-data:
+  mc-proxy-data:
     name: mc-data
-  owncast-data:
-    name: owncast-data
-  ollama-data:
-    name: ollama-data
-  open-webui-data:
-    name: open-webui-data
   portainer-data:
     name: portainer-data
 
@@ -23,35 +17,6 @@ services:
     ports: 
       - 3001:8080
 
-  # --- STREAMING ---
-  owncast:
-    image: owncast/owncast:0.2.4
-    container_name: owncast
-    volumes:
-      - owncast-data:/app/data
-    restart: unless-stopped
-    ports: 
-      - "3002:8080/tcp"
-      - "1935:19135/tcp"
- 
-  # --- LOCALE AI ---
-  ollama:
-    image: ollama/ollama:latest
-    container_name: ollama
-    hostname: ollama
-    volumes:
-      - ollama-data:/root/.ollama
-    restart: unless-stopped
-    
-  # --- MESSENGER CLIENT ---
-  element:
-    image: vectorim/element-web:v1.12.13
-    container_name: element
-    hostname: element
-    restart: unless-stopped
-    ports:
-      - "3004:80/tcp"
-
        # --- Cloud Console ---
   portainer:
     container_name: portainer
@@ -62,7 +27,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer-data:/data
     ports:
-      - "3003:9000/tcp"
+      - "3002:9000/tcp"
   
   # --- Minecraft Server ---
   minecraft:
@@ -74,12 +39,12 @@ services:
       - "25565:25565/tcp"
     environment:
       EULA: "TRUE"
-      TYPE: ${ENV_MC_TYPE}
-      MEMORY:  ${ENV_MC_MEMORY}
-      VERSION: ${ENV_MC_VERSION}
+      TYPE: VELOCITY
+      MEMORY:  512M
+      VERSION: 1.21.11
     volumes:
       - mc-data:/data
-    restart: ${ENV_MC_RESTART}
+    restart: unless-stopped
 
 
   
