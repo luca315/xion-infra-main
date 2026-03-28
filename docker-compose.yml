@@ -34,7 +34,7 @@ services:
       - "3002:8080/tcp"
       - "19132:19132/tcp"
  
-  # --- LOCALE AI (BACKEND) ---
+  # --- LOCALE AI ---
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
@@ -43,19 +43,6 @@ services:
       - ollama-data:/root/.ollama
     restart: unless-stopped
     
-  # --- LOCALE AI (FRONTEND) ---
-  open-webui:
-    image: ghcr.io/open-webui/open-webui:main
-    container_name: open-webui
-    hostname: open-webui
-    environment:
-      - OLLAMA_BASE_URL=http://ollama:11434
-    volumes:
-      - open-webui-data:/app/data
-    restart: unless-stopped
-    ports:
-      - "3003:8080/tcp"
-
   # --- MESSENGER CLIENT ---
   element:
     image: vectorim/element-web:v1.12.13
