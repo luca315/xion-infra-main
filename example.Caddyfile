@@ -1,0 +1,15 @@
+diagrams.domain.tld {
+  reverse_proxy 127.0.0.1:3001
+}
+
+stream.domain.tld {
+  reverse_proxy 127.0.0.1:3002
+}
+
+ai.domain.tld {
+  reverse_proxy 127.0.0.1:3003
+}
+
+chat.domain.tld {
+  reverse_proxy 127.0.0.1:3004
+}
