@@ -80,7 +80,7 @@ services:
       VERSION: ${ENV_MC_VERSION}
     volumes:
       - mc-data:/data
-    restart: ${MC_ENV_RESTART}
+    restart: ${ENV_MC_RESTART}
 
     # --- Cloud Console ---
   portainer:
