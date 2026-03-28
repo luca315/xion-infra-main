@@ -6,10 +6,6 @@ stream.domain.tld {
   reverse_proxy 127.0.0.1:3002
 }
 
-cloud.domain.tld {
-  reverse_proxy 127.0.0.1:3003
-}
-
 chat.domain.tld {
   reverse_proxy 127.0.0.1:3004
 }
