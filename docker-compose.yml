@@ -65,7 +65,7 @@ services:
     ports:
       - "3004:80/tcp"
 
-  # --- Minecraft Server Proxy ---
+  # --- Minecraft Server ---
   minecraft:
     image: itzg/minecraft-server:${ENV_MC_IMAGE_VERSION}
     container_name: mc-server
@@ -80,7 +80,7 @@ services:
       VERSION: ${ENV_MC_VERSION}
     volumes:
       - mc-data:/data
-    restart: unless-stopped
+    restart: ${MC_ENV_RESTART}
 
     # --- Cloud Console ---
     portainer:
