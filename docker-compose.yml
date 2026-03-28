@@ -32,6 +32,7 @@ services:
     ports: 
       - "3002:8080/tcp"
       - "19132:19132/tcp"
+ 
   # --- LOCALE AI (BACKEND) ---
   ollama:
     image: ollama/ollama:latest
