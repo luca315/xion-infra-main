@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
     ports: 
       - "3002:8080/tcp"
-      - "19132:19132/tcp"
+      - "19135:19135/tcp"
  
   # --- LOCALE AI ---
   ollama:
