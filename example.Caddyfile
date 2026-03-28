@@ -2,10 +2,15 @@ diagrams.domain.tld {
   reverse_proxy 127.0.0.1:3001
 }
 
-icecast.domain.tld {
-  reverse_proxy 127.0.0.1:3002
-}
-
 console.domain.tld {
   reverse_proxy 127.0.0.1:3003
 }
+
+status.domain.tld {
+  reverse_proxy 127.0.0.1:3004
+}
+
+icecast.domain.tld {
+  reverse_proxy 127.0.0.1:3005
+}
+
